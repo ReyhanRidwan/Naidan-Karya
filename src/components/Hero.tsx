@@ -4,7 +4,7 @@
  */
 
 import { Calculator, Calendar, ArrowRight, CheckCircle, Shield } from 'lucide-react';
-import heroBg from '../assets/images/hero_ruko_indonesia_1782231371472.jpg';
+const heroBg = '/images/hero_ruko_indonesia_1782231371472.jpg';
 
 export default function Hero() {
   const scrollToSection = (id: string) => {

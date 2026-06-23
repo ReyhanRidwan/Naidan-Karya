@@ -6,8 +6,8 @@
 import { useState } from 'react';
 import { Eye, MapPin, Layers, Layout, Compass, CheckCircle2, Sliders } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import heroBg from '../assets/images/hero_ruko_indonesia_1782231371472.jpg';
-import renovBg from '../assets/images/renovasi_komersial_1782231391194.jpg';
+const heroBg = '/images/hero_ruko_indonesia_1782231371472.jpg';
+const renovBg = '/images/renovasi_komersial_1782231391194.jpg';
 
 interface Project {
   id: string;
@@ -26,6 +26,104 @@ interface Project {
 export default function Portfolio() {
   const [selectedFilter, setSelectedFilter] = useState<string>('all');
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+
+  const renderBlueprint = (project: Project) => {
+    let src = heroBg;
+    let imgClass = 'brightness-[0.7] contrast-[1.0]';
+    let badge = 'PROYEK AKTUAL NKM';
+    let label = 'DOKUMENTASI RIIL';
+    let sub = 'Kondisi Lapangan Selesai 100%';
+    let isCctv = false;
+
+    if (project.id === 'proj-gudang-penjaringan') {
+      src = heroBg;
+      imgClass = 'brightness-[0.75] contrast-[1.15] saturate-[0.6] hue-rotate-[190deg] scale-125 origin-center';
+      badge = 'STRUKTUR UTAMA';
+      label = 'KONSTRUKSI BAJA GUDANG';
+      sub = 'Portal WF-250 & Pondasi Footplat';
+    } else if (project.id === 'proj-baja-priok') {
+      src = heroBg;
+      imgClass = 'brightness-[0.7] contrast-[1.2] hue-rotate-[15deg] saturate-[1.2] scale-110 origin-bottom';
+      badge = 'PEKERJAAN BAJA';
+      label = 'RANGKA ATAP SPANDEK';
+      sub = 'Kanal C-75 Presisi Tinggi';
+    } else if (project.id === 'proj-interior-ruko-priok') {
+      src = renovBg;
+      imgClass = 'brightness-[0.75] contrast-[1.1] sepia-[15%] saturate-[1.2] scale-[1.2] origin-right';
+      badge = 'FINISHING INTERIOR';
+      label = 'RESEPSIONIS COUNTER';
+      sub = 'Multiplex & Finishing HPL Taco';
+    } else if (project.id === 'proj-cctv-kantor') {
+      src = renovBg;
+      imgClass = 'brightness-[0.5] contrast-[1.3] saturate-[0.8] grayscale-[20%] hue-rotate-[330deg] scale-[1.2]';
+      badge = 'SISTEM KEAMANAN';
+      label = 'CCTV IP CAM MONITOR';
+      sub = 'Hikvision Full HD Live View';
+      isCctv = true;
+    } else if (project.id === 'proj-mep-ruko-priok') {
+      src = heroBg;
+      imgClass = 'brightness-[0.6] contrast-[1.25] saturate-[0.7] hue-rotate-[190deg] scale-[1.15] origin-top';
+      badge = 'UTILITAS MEP';
+      label = 'INSTALASI LISTRIK & SANITASI';
+      sub = 'Panel Schneider & Pipa AW Rucika';
+    }
+
+    return (
+      <div className="absolute inset-0 bg-brand-blue-950 overflow-hidden w-full h-full">
+        <img 
+          src={src} 
+          alt={project.title} 
+          className={`w-full h-full object-cover transition-transform duration-500 hover:scale-105 ${imgClass}`}
+          referrerPolicy="no-referrer"
+        />
+        
+        {isCctv && (
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,rgba(0,0,0,0.45))] pointer-events-none">
+            <div className="absolute top-4 right-4 flex items-center space-x-1.5 bg-red-600/95 text-white font-mono text-[8px] font-bold px-2 py-0.5 rounded animate-pulse">
+              <span className="w-1.5 h-1.5 rounded-full bg-white block" />
+              <span>REC LIVE</span>
+            </div>
+            <div className="absolute inset-0 border-[0.5px] border-white/10 pointer-events-none m-3 rounded flex flex-col justify-between p-2">
+              <div className="flex justify-between text-white/40 font-mono text-[5px]">
+                <span>[ PORTFOLIO_CAM ]</span>
+                <span>CAM_01_SEC</span>
+              </div>
+              <div className="flex justify-between text-white/40 font-mono text-[5px]">
+                <span>30 FPS</span>
+                <span>NKM SECURITY</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {project.id === 'proj-mep-ruko-priok' && (
+          <div className="absolute inset-0 bg-sky-500/5 mix-blend-color pointer-events-none">
+            <div className="absolute inset-0 border-[0.5px] border-sky-400/10 pointer-events-none m-3 rounded flex flex-col justify-between p-2">
+              <div className="flex justify-between text-sky-400/40 font-mono text-[6px]">
+                <span>SYS_OK</span>
+                <span>VOLTAGE: BALANCED</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-950/80 via-black/10 to-transparent" />
+        
+        <div className="absolute top-4 left-4 bg-brand-orange-500 text-white font-mono text-[9px] px-2 py-0.5 rounded font-bold uppercase tracking-wider z-10 shadow-md">
+          {badge}
+        </div>
+
+        <div className="absolute bottom-4 left-4 right-4 z-10">
+          <span className="text-[8px] uppercase font-mono tracking-widest text-slate-300 font-bold block">
+            {label}
+          </span>
+          <span className="text-white text-[11px] font-display font-bold block mt-0.5 drop-shadow-sm leading-tight">
+            {sub}
+          </span>
+        </div>
+      </div>
+    );
+  };
 
   const filters = [
     { value: 'all', label: 'Semua Proyek' },
@@ -261,27 +359,7 @@ export default function Portfolio() {
                       <div className="absolute inset-0 bg-gradient-to-t from-brand-blue-900/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     </>
                   ) : (
-                    // Stylized Schematic Draw
-                    <div className="absolute inset-0 bg-brand-blue-800 p-6 flex flex-col justify-between overflow-hidden">
-                      <div className="absolute inset-0 grid-overlay-dark opacity-10 pointer-events-none" />
-                      <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                        {/* Blueprint background symbol */}
-                        <svg className="w-36 h-36 text-white" viewBox="0 0 100 100" fill="none" stroke="currentColor">
-                          <rect x="10" y="10" width="80" height="80" strokeWidth="0.5" strokeDasharray="1,1" />
-                          <line x1="10" y1="10" x2="90" y2="90" strokeWidth="0.5" />
-                          <line x1="90" y1="10" x2="10" y2="90" strokeWidth="0.5" />
-                          <circle cx="50" cy="50" r="25" strokeWidth="1" />
-                        </svg>
-                      </div>
-
-                      <div className="z-10 bg-brand-orange-500 text-white font-mono text-[9px] px-2 py-0.5 rounded inline-block self-start font-bold uppercase tracking-wider">
-                        BLUEPRINT SCHEMATIC
-                      </div>
-
-                      <div className="z-10 font-mono text-[10px] text-slate-300">
-                        NK-DWG: {project.id.toUpperCase()}
-                      </div>
-                    </div>
+                    renderBlueprint(project)
                   )}
 
                   {/* Project overlay hover button */}
@@ -360,15 +438,7 @@ export default function Portfolio() {
                       referrerPolicy="no-referrer"
                     />
                   ) : (
-                    <div className="absolute inset-0 bg-brand-blue-800 p-8 flex flex-col justify-between overflow-hidden">
-                      <div className="absolute inset-0 grid-overlay-dark opacity-10 pointer-events-none" />
-                      <div className="bg-brand-orange-500 text-white font-mono text-xs px-2.5 py-1 rounded inline-block self-start font-bold uppercase tracking-wider">
-                        BLUEPRINT DETAIL SCHEMATIC
-                      </div>
-                      <div className="font-mono text-sm text-slate-300">
-                        DOC ID: NKM-SYS-{activeProject.id.toUpperCase()}
-                      </div>
-                    </div>
+                    renderBlueprint(activeProject)
                   )}
 
                   {/* Header metadata overlay */}
