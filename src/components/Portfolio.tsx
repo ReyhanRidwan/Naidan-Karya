@@ -9,6 +9,11 @@ import { motion, AnimatePresence } from 'motion/react';
 const heroBg = '/images/hero_ruko_indonesia_1782231371472.jpg';
 const renovBg = '/images/renovasi_komersial_1782231391194.jpg';
 
+const komersialImg = 'https://res.cloudinary.com/di6ziqvtp/image/upload/v1782823473/proyek_konstruksi_komersial_hcin7g.png';
+const industriImg = 'https://res.cloudinary.com/di6ziqvtp/image/upload/v1782823474/konstruksi_bangunan_industri_iwgpwz.jpg';
+const bajaImg = 'https://res.cloudinary.com/di6ziqvtp/image/upload/v1782823477/konstruksi_rangka_baja_t71evp.png';
+const parketImg = 'https://res.cloudinary.com/di6ziqvtp/image/upload/v1782823479/interior_lantai_parket_mugzli.png';
+
 interface Project {
   id: string;
   title: string;
@@ -36,33 +41,33 @@ export default function Portfolio() {
     let isCctv = false;
 
     if (project.id === 'proj-gudang-penjaringan') {
-      src = heroBg;
-      imgClass = 'brightness-[0.75] contrast-[1.15] saturate-[0.6] hue-rotate-[190deg] scale-125 origin-center';
+      src = industriImg;
+      imgClass = 'brightness-[0.8] contrast-[1.1] saturate-[1.1] scale-125 origin-center';
       badge = 'STRUKTUR UTAMA';
       label = 'KONSTRUKSI BAJA GUDANG';
       sub = 'Portal WF-250 & Pondasi Footplat';
     } else if (project.id === 'proj-baja-priok') {
-      src = heroBg;
-      imgClass = 'brightness-[0.7] contrast-[1.2] hue-rotate-[15deg] saturate-[1.2] scale-110 origin-bottom';
+      src = bajaImg;
+      imgClass = 'brightness-[0.85] contrast-[1.1] saturate-[1.1] scale-110 origin-bottom';
       badge = 'PEKERJAAN BAJA';
       label = 'RANGKA ATAP SPANDEK';
       sub = 'Kanal C-75 Presisi Tinggi';
     } else if (project.id === 'proj-interior-ruko-priok') {
-      src = renovBg;
-      imgClass = 'brightness-[0.75] contrast-[1.1] sepia-[15%] saturate-[1.2] scale-[1.2] origin-right';
+      src = parketImg;
+      imgClass = 'brightness-[0.85] contrast-[1.1] saturate-[1.1] scale-[1.2] origin-right';
       badge = 'FINISHING INTERIOR';
       label = 'RESEPSIONIS COUNTER';
       sub = 'Multiplex & Finishing HPL Taco';
     } else if (project.id === 'proj-cctv-kantor') {
-      src = renovBg;
-      imgClass = 'brightness-[0.5] contrast-[1.3] saturate-[0.8] grayscale-[20%] hue-rotate-[330deg] scale-[1.2]';
+      src = parketImg;
+      imgClass = 'brightness-[0.6] contrast-[1.2] saturate-[0.9] scale-[1.2]';
       badge = 'SISTEM KEAMANAN';
       label = 'CCTV IP CAM MONITOR';
       sub = 'Hikvision Full HD Live View';
       isCctv = true;
     } else if (project.id === 'proj-mep-ruko-priok') {
-      src = heroBg;
-      imgClass = 'brightness-[0.6] contrast-[1.25] saturate-[0.7] hue-rotate-[190deg] scale-[1.15] origin-top';
+      src = komersialImg;
+      imgClass = 'brightness-[0.7] contrast-[1.15] saturate-[1.0] scale-[1.15] origin-top';
       badge = 'UTILITAS MEP';
       label = 'INSTALASI LISTRIK & SANITASI';
       sub = 'Panel Schneider & Pipa AW Rucika';
@@ -145,7 +150,7 @@ export default function Portfolio() {
       luas: '150 m²',
       material: 'Pondasi Bore Pile, Beton K-275, Bata Ringan',
       status: '100% Selesai',
-      image: heroBg,
+      image: komersialImg,
       specifications: [
         'Konstruksi pondasi bore pile kedalaman 12 meter',
         'Struktur kolom dan balok beton bertulang mutu K-275 SNI',
@@ -182,7 +187,7 @@ export default function Portfolio() {
       luas: '180 m²',
       material: 'Sekat Partisi Gypsum, Kaca Temper, Cat Dulux',
       status: '100% Selesai',
-      image: renovBg,
+      image: komersialImg,
       specifications: [
         'Pembongkaran sekat ruang lama diganti partisi gypsum akustik kedap suara',
         'Pemasangan pintu & dinding kaca temper tebal 10mm untuk ruang meeting utama',
@@ -200,7 +205,7 @@ export default function Portfolio() {
       luas: '220 m²',
       material: 'Semen Waterproofing Sika, Cat Weather Guard, ACP',
       status: '100% Selesai',
-      image: renovBg,
+      image: komersialImg,
       specifications: [
         'Waterproofing dak atas beton rembes dengan pelapis semen SikaTop-107',
         'Pekerjaan fasad depan ruko menggunakan lembaran Aluminium Composite Panel (ACP)',
